@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# WITHNEY Fashion
+
+> Luxury. Unisex. Bold.
+
+A modern fashion e-commerce frontend built with **Next.js**, **TypeScript**, and **Tailwind CSS**.
+
+---
+
+## Tech Stack
+
+- **Framework:** Next.js 15 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Fonts:** Cormorant Garamond + Inter (Google Fonts)
+
+---
+
+## Pages
+
+| Page | Route | Description |
+|------|-------|-------------|
+| Home | `/` | Hero, featured drops, manifesto, CTA |
+| Collections | `/collections` | Full product grid with filters |
+| About | `/about` | Brand story, values, founder, stats |
+| Contact | `/contact` | Contact form with success state |
+
+---
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Design System
 
-## Learn More
+| Token | Value |
+|-------|-------|
+| Background | `#0A0A0A` |
+| Text | `#F5F0E8` |
+| Gold Accent | `#C9A96E` |
+| Display Font | Cormorant Garamond |
+| Body Font | Inter |
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Responsive mobile-first design
+- Sticky navbar with animated hamburger menu
+- Smooth hover effects on all buttons and links
+- Animated marquee ticker
+- Product cards with slide-up quick view
+- Contact form with success state
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Brand
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**WITHNEY** is a luxury unisex fashion brand based in Lagos, Nigeria.  
+Founded on the belief that fashion has no gender — only power.
+
+---
+
+© 2026 WITHNEY FASHION. ALL RIGHTS RESERVED.
