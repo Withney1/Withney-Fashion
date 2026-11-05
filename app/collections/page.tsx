@@ -25,122 +25,86 @@ export default function Collections() {
     if (!product) return;
     const allSizes = [...product.sizes, ...(product.shoeSizes ?? [])];
     const size = selectedSizes[productId];
-    if (allSizes.length > 0 && !size) {
-      alert("Please select a size first.");
-      return;
-    }
-    addItem({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      size: size || "One Size",
-      quantity: 1,
-      image: product.image,
-    });
+    if (allSizes.length > 0 && !size) { alert("Please select a size first."); return; }
+    addItem({ id: product.id, name: product.name, price: product.price, size: size || "One Size", quantity: 1, image: product.image });
     setAdded((prev) => ({ ...prev, [productId]: true }));
     setTimeout(() => setAdded((prev) => ({ ...prev, [productId]: false })), 2000);
     toggleCart();
   }
 
   return (
-    <div className="bg-[#0A0A0A] min-h-screen">
-      <div className="w-full max-w-6xl mx-auto px-6 md:px-8 pt-32 pb-24">
+    <div style={{ backgroundColor: "#0A0A0A", width: "100%", minHeight: "100vh", overflowX: "hidden" }}>
+      <div style={{ maxWidth: "1152px", margin: "0 auto", padding: "128px 32px 96px" }}>
 
         {/* Header */}
-        <div className="mb-16">
-          <p className="font-[family-name:var(--font-inter)] text-xs tracking-[0.4em] text-[#C9A96E] uppercase mb-4">
-            2026 Season
-          </p>
-          <h1 className="font-[family-name:var(--font-cormorant)] text-6xl md:text-8xl font-light text-[#F5F0E8] leading-none">
-            Collections
-          </h1>
+        <div style={{ marginBottom: "64px" }}>
+          <p className="font-[family-name:var(--font-inter)]" style={{ fontSize: "11px", letterSpacing: "0.4em", color: "#C9A96E", textTransform: "uppercase", marginBottom: "16px" }}>2026 Season</p>
+          <h1 className="font-[family-name:var(--font-cormorant)]" style={{ fontSize: "clamp(3rem, 8vw, 7rem)", fontWeight: 300, color: "#F5F0E8", lineHeight: 0.95 }}>Collections</h1>
         </div>
 
         {/* Auth notice */}
         {!user && (
-          <div className="border border-[#C9A96E]/20 bg-[#C9A96E]/5 px-6 py-4 mb-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <p className="font-[family-name:var(--font-inter)] text-xs text-[#F5F0E8]/50">
-              Sign in to add items to your cart and checkout.
-            </p>
-            <button onClick={() => router.push("/login")}
-              className="font-[family-name:var(--font-inter)] text-xs tracking-[0.2em] uppercase text-[#C9A96E] hover:text-[#F5F0E8] transition-colors duration-300 shrink-0">
+          <div style={{ border: "1px solid rgba(201,169,110,0.2)", backgroundColor: "rgba(201,169,110,0.05)", padding: "16px 24px", marginBottom: "40px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "16px" }}>
+            <p className="font-[family-name:var(--font-inter)]" style={{ fontSize: "13px", color: "rgba(245,240,232,0.5)" }}>Sign in to add items to your cart and checkout.</p>
+            <button onClick={() => router.push("/login")} className="font-[family-name:var(--font-inter)]"
+              style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#C9A96E", background: "none", border: "none", cursor: "pointer" }}>
               Sign In →
             </button>
           </div>
         )}
 
         {/* Filters */}
-        <div className="flex gap-6 mb-16 overflow-x-auto pb-2">
+        <div style={{ display: "flex", gap: "32px", borderBottom: "1px solid rgba(201,169,110,0.15)", marginBottom: "64px", overflowX: "auto", paddingBottom: "0" }}>
           {filters.map((f) => (
-            <button key={f} onClick={() => setActiveFilter(f)}
-              className={`font-[family-name:var(--font-inter)] text-xs tracking-[0.2em] uppercase whitespace-nowrap pb-2 border-b-2 transition-all duration-300 ${
-                activeFilter === f
-                  ? "border-[#C9A96E] text-[#C9A96E]"
-                  : "border-transparent text-[#F5F0E8]/40 hover:text-[#F5F0E8]"
-              }`}>
+            <button key={f} onClick={() => setActiveFilter(f)} className="font-[family-name:var(--font-inter)]"
+              style={{ fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", whiteSpace: "nowrap", paddingBottom: "16px", border: "none", borderBottom: activeFilter === f ? "2px solid #C9A96E" : "2px solid transparent", color: activeFilter === f ? "#C9A96E" : "rgba(245,240,232,0.4)", backgroundColor: "transparent", cursor: "pointer", transition: "all 0.3s" }}>
               {f}
             </button>
           ))}
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "48px" }}>
           {filtered.map((item) => {
             const allSizes = [...item.sizes, ...(item.shoeSizes ?? [])];
             return (
-              <div key={item.id} className="group">
-                <div className="relative aspect-[3/4] bg-[#111] overflow-hidden mb-4 border border-[#C9A96E]/10">
+              <div key={item.id}>
+                {/* Image */}
+                <div style={{ position: "relative", aspectRatio: "3/4", backgroundColor: "#111", overflow: "hidden", marginBottom: "16px", border: "1px solid rgba(201,169,110,0.1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   {item.image ? (
-                    <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                    <img src={item.image} alt={item.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                   ) : (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="font-[family-name:var(--font-cormorant)] text-9xl text-[#C9A96E]/8 font-light select-none">W</span>
-                    </div>
+                    <span className="font-[family-name:var(--font-cormorant)]" style={{ fontSize: "7rem", color: "rgba(201,169,110,0.08)", fontWeight: 300 }}>W</span>
                   )}
-                  <div className="absolute top-4 left-4">
-                    <span className="font-[family-name:var(--font-inter)] text-[10px] tracking-[0.2em] uppercase bg-[#C9A96E] text-[#0A0A0A] px-3 py-1">
-                      {item.tag}
-                    </span>
+                  <div style={{ position: "absolute", top: "16px", left: "16px" }}>
+                    <span className="font-[family-name:var(--font-inter)]" style={{ fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", backgroundColor: "#C9A96E", color: "#0A0A0A", padding: "4px 12px" }}>{item.tag}</span>
                   </div>
-                  <div className="absolute bottom-4 right-4">
-                    <span className="font-[family-name:var(--font-inter)] text-[10px] tracking-[0.2em] uppercase text-[#F5F0E8]/30">
-                      {item.category}
-                    </span>
+                  <div style={{ position: "absolute", bottom: "16px", right: "16px" }}>
+                    <span className="font-[family-name:var(--font-inter)]" style={{ fontSize: "10px", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(245,240,232,0.3)" }}>{item.category}</span>
                   </div>
                 </div>
 
-                <div className="flex items-start justify-between mb-3">
-                  <div className="flex-1 mr-4">
-                    <h3 className="font-[family-name:var(--font-cormorant)] text-xl text-[#F5F0E8] mb-1 group-hover:text-[#C9A96E] transition-colors duration-300">
-                      {item.name}
-                    </h3>
-                    <p className="font-[family-name:var(--font-inter)] text-xs text-[#F5F0E8]/30 tracking-widest uppercase mb-2">
-                      {item.category}
-                    </p>
-                    <p className="font-[family-name:var(--font-inter)] text-xs text-[#F5F0E8]/40 leading-relaxed">
-                      {item.description}
-                    </p>
+                {/* Info */}
+                <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: "12px" }}>
+                  <div style={{ flex: 1, marginRight: "16px" }}>
+                    <h3 className="font-[family-name:var(--font-cormorant)]" style={{ fontSize: "20px", color: "#F5F0E8", marginBottom: "4px" }}>{item.name}</h3>
+                    <p className="font-[family-name:var(--font-inter)]" style={{ fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(245,240,232,0.3)", marginBottom: "8px" }}>{item.category}</p>
+                    <p className="font-[family-name:var(--font-inter)]" style={{ fontSize: "13px", color: "rgba(245,240,232,0.4)", lineHeight: 1.7 }}>{item.description}</p>
                   </div>
-                  <p className="font-[family-name:var(--font-inter)] text-sm text-[#C9A96E] shrink-0">
-                    ₦{item.price.toLocaleString()}
-                  </p>
+                  <p className="font-[family-name:var(--font-inter)]" style={{ fontSize: "14px", color: "#C9A96E", flexShrink: 0 }}>₦{item.price.toLocaleString()}</p>
                 </div>
 
-                {/* Size selector */}
+                {/* Sizes */}
                 {allSizes.length > 0 && (
-                  <div className="mb-4">
-                    <p className="font-[family-name:var(--font-inter)] text-[10px] tracking-[0.2em] uppercase text-[#F5F0E8]/30 mb-2">
+                  <div style={{ marginBottom: "16px" }}>
+                    <p className="font-[family-name:var(--font-inter)]" style={{ fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(245,240,232,0.3)", marginBottom: "8px" }}>
                       {item.shoeSizes && item.shoeSizes.length > 0 ? "Shoe Size (EU)" : "Size"}
                     </p>
-                    <div className="flex flex-wrap gap-2">
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
                       {allSizes.map((s) => (
-                        <button key={s}
-                          onClick={() => setSelectedSizes((prev) => ({ ...prev, [item.id]: s }))}
-                          className={`font-[family-name:var(--font-inter)] text-xs px-3 py-1.5 border transition-all duration-200 ${
-                            selectedSizes[item.id] === s
-                              ? "bg-[#C9A96E] text-[#0A0A0A] border-[#C9A96E]"
-                              : "border-[#F5F0E8]/20 text-[#F5F0E8]/50 hover:border-[#C9A96E] hover:text-[#C9A96E]"
-                          }`}>
+                        <button key={s} onClick={() => setSelectedSizes((prev) => ({ ...prev, [item.id]: s }))}
+                          className="font-[family-name:var(--font-inter)]"
+                          style={{ fontSize: "12px", padding: "6px 12px", border: `1px solid ${selectedSizes[item.id] === s ? "#C9A96E" : "rgba(245,240,232,0.2)"}`, backgroundColor: selectedSizes[item.id] === s ? "#C9A96E" : "transparent", color: selectedSizes[item.id] === s ? "#0A0A0A" : "rgba(245,240,232,0.5)", cursor: "pointer", transition: "all 0.2s" }}>
                           {s}
                         </button>
                       ))}
@@ -149,12 +113,8 @@ export default function Collections() {
                 )}
 
                 {/* Add to Cart */}
-                <button onClick={() => handleAddToCart(item.id)}
-                  className={`w-full font-[family-name:var(--font-inter)] text-xs tracking-[0.2em] uppercase py-3 transition-all duration-300 ${
-                    added[item.id]
-                      ? "bg-[#F5F0E8] text-[#0A0A0A]"
-                      : "border border-[#C9A96E] text-[#C9A96E] hover:bg-[#C9A96E] hover:text-[#0A0A0A]"
-                  }`}>
+                <button onClick={() => handleAddToCart(item.id)} className="font-[family-name:var(--font-inter)]"
+                  style={{ width: "100%", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", padding: "14px", border: `1px solid ${added[item.id] ? "#F5F0E8" : "#C9A96E"}`, backgroundColor: added[item.id] ? "#F5F0E8" : "transparent", color: added[item.id] ? "#0A0A0A" : "#C9A96E", cursor: "pointer", transition: "all 0.3s" }}>
                   {added[item.id] ? "✓ Added to Cart" : "Add to Cart"}
                 </button>
               </div>

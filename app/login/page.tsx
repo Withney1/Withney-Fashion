@@ -15,94 +15,72 @@ export default function Login() {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
-
-    // Admin check
     if (email === "admin@withney.com" && password === "withney2026") {
       login({ name: "Admin", email });
       setAdmin(true);
       router.push("/admin");
       return;
     }
-
-    // Basic user login (demo)
     if (email && password.length >= 6) {
       login({ name: email.split("@")[0], email });
       router.push("/collections");
       return;
     }
-
     setError("Invalid email or password.");
   }
 
   return (
-    <div className="bg-[#0A0A0A] min-h-screen flex items-center justify-center px-6 pt-24 pb-16">
-      <div className="w-full max-w-md">
+    <div style={{ backgroundColor: "#0A0A0A", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "32px", width: "100%" }}>
+      <div style={{ width: "100%", maxWidth: "440px" }}>
 
         {/* Logo */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-3 mb-6">
-            <div className="w-9 h-9 border border-[#C9A96E] flex items-center justify-center">
-              <span className="font-[family-name:var(--font-cormorant)] text-[#C9A96E] text-xl font-semibold">W</span>
+        <div style={{ textAlign: "center", marginBottom: "48px" }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: "12px", marginBottom: "24px" }}>
+            <div style={{ width: "36px", height: "36px", border: "1px solid #C9A96E", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <span className="font-[family-name:var(--font-cormorant)]" style={{ color: "#C9A96E", fontSize: "20px", fontWeight: 600 }}>W</span>
             </div>
-            <span className="font-[family-name:var(--font-cormorant)] text-[#F5F0E8] text-lg tracking-[0.3em] font-light">WITHNEY</span>
+            <span className="font-[family-name:var(--font-cormorant)]" style={{ color: "#F5F0E8", fontSize: "18px", letterSpacing: "0.3em", fontWeight: 300 }}>WITHNEY</span>
           </div>
-          <h1 className="font-[family-name:var(--font-cormorant)] text-4xl text-[#F5F0E8] font-light mb-2">Welcome Back</h1>
-          <p className="font-[family-name:var(--font-inter)] text-xs text-[#F5F0E8]/40 tracking-widest">Sign in to your account</p>
+          <h1 className="font-[family-name:var(--font-cormorant)]" style={{ fontSize: "clamp(2rem, 5vw, 3rem)", fontWeight: 300, color: "#F5F0E8", marginBottom: "8px" }}>Welcome Back</h1>
+          <p className="font-[family-name:var(--font-inter)]" style={{ fontSize: "11px", letterSpacing: "0.2em", color: "rgba(245,240,232,0.4)" }}>Sign in to your account</p>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-8">
-          <div>
-            <label className="font-[family-name:var(--font-inter)] text-[10px] tracking-[0.3em] uppercase text-[#C9A96E] block mb-3">Email</label>
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="your@email.com"
-              className="w-full bg-transparent border-b border-[#F5F0E8]/20 py-3 font-[family-name:var(--font-inter)] text-sm text-[#F5F0E8] placeholder-[#F5F0E8]/20 focus:outline-none focus:border-[#C9A96E] transition-colors duration-300"
-            />
-          </div>
+        <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
+          {[
+            { label: "Email", type: "email", value: email, set: setEmail, placeholder: "your@email.com" },
+            { label: "Password", type: "password", value: password, set: setPassword, placeholder: "••••••••" },
+          ].map((field) => (
+            <div key={field.label}>
+              <label className="font-[family-name:var(--font-inter)]" style={{ display: "block", fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#C9A96E", marginBottom: "12px" }}>{field.label}</label>
+              <input type={field.type} required value={field.value} onChange={(e) => field.set(e.target.value)} placeholder={field.placeholder}
+                style={{ width: "100%", background: "transparent", border: "none", borderBottom: "1px solid rgba(245,240,232,0.2)", padding: "12px 0", fontSize: "14px", color: "#F5F0E8", outline: "none", fontFamily: "inherit" }} />
+            </div>
+          ))}
 
-          <div>
-            <label className="font-[family-name:var(--font-inter)] text-[10px] tracking-[0.3em] uppercase text-[#C9A96E] block mb-3">Password</label>
-            <input
-              type="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              className="w-full bg-transparent border-b border-[#F5F0E8]/20 py-3 font-[family-name:var(--font-inter)] text-sm text-[#F5F0E8] placeholder-[#F5F0E8]/20 focus:outline-none focus:border-[#C9A96E] transition-colors duration-300"
-            />
-          </div>
+          {error && <p className="font-[family-name:var(--font-inter)]" style={{ fontSize: "13px", color: "rgba(239,68,68,0.8)" }}>{error}</p>}
 
-          {error && (
-            <p className="font-[family-name:var(--font-inter)] text-xs text-red-400">{error}</p>
-          )}
-
-          <button
-            type="submit"
-            className="w-full font-[family-name:var(--font-inter)] text-xs tracking-[0.2em] uppercase bg-[#C9A96E] text-[#0A0A0A] py-5 hover:bg-[#F5F0E8] transition-all duration-300">
+          <button type="submit" className="font-[family-name:var(--font-inter)]"
+            style={{ width: "100%", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", backgroundColor: "#C9A96E", color: "#0A0A0A", padding: "20px", border: "none", cursor: "pointer" }}>
             Sign In
           </button>
         </form>
 
         {/* Links */}
-        <div className="mt-8 text-center space-y-4">
-          <p className="font-[family-name:var(--font-inter)] text-xs text-[#F5F0E8]/40">
+        <div style={{ marginTop: "32px", textAlign: "center", display: "flex", flexDirection: "column", gap: "16px" }}>
+          <p className="font-[family-name:var(--font-inter)]" style={{ fontSize: "13px", color: "rgba(245,240,232,0.4)" }}>
             Don't have an account?{" "}
-            <Link href="/signup" className="text-[#C9A96E] hover:text-[#F5F0E8] transition-colors duration-300">
-              Create one
-            </Link>
+            <Link href="/signup" style={{ color: "#C9A96E", textDecoration: "none" }}>Create one</Link>
           </p>
-          <Link href="/" className="font-[family-name:var(--font-inter)] text-xs text-[#F5F0E8]/30 hover:text-[#F5F0E8]/60 transition-colors duration-300 block">
+          <Link href="/" className="font-[family-name:var(--font-inter)]"
+            style={{ fontSize: "12px", color: "rgba(245,240,232,0.25)", textDecoration: "none" }}>
             Continue browsing without signing in →
           </Link>
         </div>
 
         {/* Admin hint */}
-        <div className="mt-12 border border-[#C9A96E]/10 p-4 text-center">
-          <p className="font-[family-name:var(--font-inter)] text-[10px] text-[#F5F0E8]/20 tracking-widest uppercase">
+        <div style={{ marginTop: "48px", border: "1px solid rgba(201,169,110,0.1)", padding: "16px", textAlign: "center" }}>
+          <p className="font-[family-name:var(--font-inter)]" style={{ fontSize: "10px", color: "rgba(245,240,232,0.2)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
             Admin: admin@withney.com / withney2026
           </p>
         </div>
