@@ -26,10 +26,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${cormorant.variable} ${inter.variable} bg-[#0A0A0A] text-[#F5F0E8] antialiased`}>
+    <html lang="en" className="overflow-x-hidden">
+      <body className={`${cormorant.variable} ${inter.variable} bg-[#0A0A0A] text-[#F5F0E8] antialiased min-h-screen w-full overflow-x-hidden`}>
         <Navbar />
-        <main>{children}</main>
+        <main className="w-full overflow-x-hidden">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>
