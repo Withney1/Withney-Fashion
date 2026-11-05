@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -8,9 +8,12 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
-  background: #FFFFFF;
-  color: #0A0A0A;
+  background: #0A0A0A;
+  color: #F5F0E8;
+  overflow-x: hidden;
+  width: 100%;
 }

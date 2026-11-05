@@ -23,15 +23,12 @@ export default function Collections() {
   function handleAddToCart(productId: string) {
     const product = products.find((p) => p.id === productId);
     if (!product) return;
-
     const allSizes = [...product.sizes, ...(product.shoeSizes ?? [])];
     const size = selectedSizes[productId];
-
     if (allSizes.length > 0 && !size) {
       alert("Please select a size first.");
       return;
     }
-
     addItem({
       id: product.id,
       name: product.name,
@@ -40,15 +37,14 @@ export default function Collections() {
       quantity: 1,
       image: product.image,
     });
-
     setAdded((prev) => ({ ...prev, [productId]: true }));
     setTimeout(() => setAdded((prev) => ({ ...prev, [productId]: false })), 2000);
     toggleCart();
   }
 
   return (
-    <div className="bg-[#0A0A0A] min-h-screen pt-32 pb-24 px-8">
-      <div className="max-w-6xl mx-auto">
+    <div className="bg-[#0A0A0A] min-h-screen">
+      <div className="w-full max-w-6xl mx-auto px-6 md:px-8 pt-32 pb-24">
 
         {/* Header */}
         <div className="mb-16">
@@ -62,12 +58,12 @@ export default function Collections() {
 
         {/* Auth notice */}
         {!user && (
-          <div className="border border-[#C9A96E]/20 bg-[#C9A96E]/5 px-6 py-4 mb-10 flex items-center justify-between">
+          <div className="border border-[#C9A96E]/20 bg-[#C9A96E]/5 px-6 py-4 mb-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <p className="font-[family-name:var(--font-inter)] text-xs text-[#F5F0E8]/50">
               Sign in to add items to your cart and checkout.
             </p>
             <button onClick={() => router.push("/login")}
-              className="font-[family-name:var(--font-inter)] text-xs tracking-[0.2em] uppercase text-[#C9A96E] hover:text-[#F5F0E8] transition-colors duration-300 shrink-0 ml-6">
+              className="font-[family-name:var(--font-inter)] text-xs tracking-[0.2em] uppercase text-[#C9A96E] hover:text-[#F5F0E8] transition-colors duration-300 shrink-0">
               Sign In →
             </button>
           </div>
@@ -93,8 +89,6 @@ export default function Collections() {
             const allSizes = [...item.sizes, ...(item.shoeSizes ?? [])];
             return (
               <div key={item.id} className="group">
-
-                {/* Image */}
                 <div className="relative aspect-[3/4] bg-[#111] overflow-hidden mb-4 border border-[#C9A96E]/10">
                   {item.image ? (
                     <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
@@ -115,9 +109,8 @@ export default function Collections() {
                   </div>
                 </div>
 
-                {/* Info */}
-                <div className="flex items-start justify-between mb-4">
-                  <div>
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex-1 mr-4">
                     <h3 className="font-[family-name:var(--font-cormorant)] text-xl text-[#F5F0E8] mb-1 group-hover:text-[#C9A96E] transition-colors duration-300">
                       {item.name}
                     </h3>
@@ -128,7 +121,7 @@ export default function Collections() {
                       {item.description}
                     </p>
                   </div>
-                  <p className="font-[family-name:var(--font-inter)] text-sm text-[#C9A96E] shrink-0 ml-4">
+                  <p className="font-[family-name:var(--font-inter)] text-sm text-[#C9A96E] shrink-0">
                     ₦{item.price.toLocaleString()}
                   </p>
                 </div>
@@ -137,11 +130,12 @@ export default function Collections() {
                 {allSizes.length > 0 && (
                   <div className="mb-4">
                     <p className="font-[family-name:var(--font-inter)] text-[10px] tracking-[0.2em] uppercase text-[#F5F0E8]/30 mb-2">
-                      {item.shoeSizes ? "Shoe Size (EU)" : "Size"}
+                      {item.shoeSizes && item.shoeSizes.length > 0 ? "Shoe Size (EU)" : "Size"}
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {allSizes.map((s) => (
-                        <button key={s} onClick={() => setSelectedSizes((prev) => ({ ...prev, [item.id]: s }))}
+                        <button key={s}
+                          onClick={() => setSelectedSizes((prev) => ({ ...prev, [item.id]: s }))}
                           className={`font-[family-name:var(--font-inter)] text-xs px-3 py-1.5 border transition-all duration-200 ${
                             selectedSizes[item.id] === s
                               ? "bg-[#C9A96E] text-[#0A0A0A] border-[#C9A96E]"
