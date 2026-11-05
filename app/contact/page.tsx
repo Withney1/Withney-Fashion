@@ -11,54 +11,43 @@ export default function Contact() {
   }
 
   return (
-    <div className="bg-[#0A0A0A] min-h-screen pt-32 pb-24 px-8">
-      <div className="max-w-6xl mx-auto">
+    <div style={{ backgroundColor: "#0A0A0A", width: "100%", minHeight: "100vh", overflowX: "hidden" }}>
+      <div style={{ maxWidth: "1152px", margin: "0 auto", padding: "128px 32px 96px" }}>
 
         {/* Header */}
-        <div className="mb-20">
-          <p className="font-[family-name:var(--font-inter)] text-xs tracking-[0.4em] text-[#C9A96E] uppercase mb-6">
-            Get In Touch
-          </p>
-          <h1 className="font-[family-name:var(--font-cormorant)] text-6xl md:text-8xl font-light text-[#F5F0E8] leading-none">
-            Let's <em className="text-[#C9A96E]">Talk.</em>
+        <div style={{ marginBottom: "80px" }}>
+          <p className="font-[family-name:var(--font-inter)]" style={{ fontSize: "11px", letterSpacing: "0.4em", color: "#C9A96E", textTransform: "uppercase", marginBottom: "24px" }}>Get In Touch</p>
+          <h1 className="font-[family-name:var(--font-cormorant)]" style={{ fontSize: "clamp(3rem, 8vw, 7rem)", fontWeight: 300, color: "#F5F0E8", lineHeight: 0.95 }}>
+            Let's <em style={{ color: "#C9A96E" }}>Talk.</em>
           </h1>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "80px" }}>
 
-          {/* Left — Info */}
+          {/* Info */}
           <div>
-            <p className="font-[family-name:var(--font-inter)] text-sm text-[#F5F0E8]/50 leading-relaxed mb-16 max-w-sm">
+            <p className="font-[family-name:var(--font-inter)]" style={{ fontSize: "14px", color: "rgba(245,240,232,0.5)", lineHeight: 1.9, marginBottom: "64px", maxWidth: "340px" }}>
               Whether you have a question about a piece, a collaboration idea, or just want to talk fashion — our team is here for it.
             </p>
-
-            <div className="space-y-10">
+            <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
               {[
                 { label: "Email", value: "hello@withney.com" },
                 { label: "Phone", value: "+234 801 234 5678" },
                 { label: "Location", value: "Lagos, Nigeria" },
                 { label: "Hours", value: "Mon – Sat, 9am – 6pm WAT" },
               ].map((info) => (
-                <div key={info.label} className="border-t border-[#C9A96E]/20 pt-6">
-                  <p className="font-[family-name:var(--font-inter)] text-[10px] tracking-[0.3em] uppercase text-[#C9A96E] mb-2">
-                    {info.label}
-                  </p>
-                  <p className="font-[family-name:var(--font-inter)] text-sm text-[#F5F0E8]/70">
-                    {info.value}
-                  </p>
+                <div key={info.label} style={{ borderTop: "1px solid rgba(201,169,110,0.2)", paddingTop: "24px" }}>
+                  <p className="font-[family-name:var(--font-inter)]" style={{ fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#C9A96E", marginBottom: "8px" }}>{info.label}</p>
+                  <p className="font-[family-name:var(--font-inter)]" style={{ fontSize: "14px", color: "rgba(245,240,232,0.7)" }}>{info.value}</p>
                 </div>
               ))}
             </div>
-
-            {/* Socials */}
-            <div className="mt-16">
-              <p className="font-[family-name:var(--font-inter)] text-[10px] tracking-[0.3em] uppercase text-[#C9A96E] mb-6">
-                Follow Us
-              </p>
-              <div className="flex gap-6">
+            <div style={{ marginTop: "48px" }}>
+              <p className="font-[family-name:var(--font-inter)]" style={{ fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#C9A96E", marginBottom: "24px" }}>Follow Us</p>
+              <div style={{ display: "flex", gap: "24px" }}>
                 {["Instagram", "TikTok", "Pinterest"].map((s) => (
-                  <a key={s} href="#"
-                    className="font-[family-name:var(--font-inter)] text-xs text-[#F5F0E8]/40 hover:text-[#C9A96E] transition-colors duration-300 tracking-widest uppercase">
+                  <a key={s} href="#" className="font-[family-name:var(--font-inter)]"
+                    style={{ fontSize: "12px", color: "rgba(245,240,232,0.4)", textDecoration: "none", letterSpacing: "0.1em", textTransform: "uppercase" }}>
                     {s}
                   </a>
                 ))}
@@ -66,55 +55,36 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Right — Form */}
+          {/* Form */}
           <div>
             {submitted ? (
-              <div className="border border-[#C9A96E]/30 p-16 text-center h-full flex flex-col items-center justify-center">
-                <div className="w-12 h-12 border border-[#C9A96E] flex items-center justify-center mb-6">
-                  <span className="text-[#C9A96E] text-xl">✓</span>
+              <div style={{ border: "1px solid rgba(201,169,110,0.3)", padding: "80px 32px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "400px" }}>
+                <div style={{ width: "48px", height: "48px", border: "1px solid #C9A96E", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "24px" }}>
+                  <span style={{ color: "#C9A96E", fontSize: "20px" }}>✓</span>
                 </div>
-                <h3 className="font-[family-name:var(--font-cormorant)] text-3xl text-[#F5F0E8] mb-4">
-                  Message Received
-                </h3>
-                <p className="font-[family-name:var(--font-inter)] text-sm text-[#F5F0E8]/50">
-                  We'll get back to you within 24 hours.
-                </p>
+                <h3 className="font-[family-name:var(--font-cormorant)]" style={{ fontSize: "28px", color: "#F5F0E8", marginBottom: "16px" }}>Message Received</h3>
+                <p className="font-[family-name:var(--font-inter)]" style={{ fontSize: "13px", color: "rgba(245,240,232,0.5)" }}>We'll get back to you within 24 hours.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-8">
+              <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "40px" }}>
                 {[
                   { label: "Full Name", type: "text", placeholder: "Your name" },
                   { label: "Email Address", type: "email", placeholder: "your@email.com" },
                   { label: "Subject", type: "text", placeholder: "What's this about?" },
                 ].map((field) => (
                   <div key={field.label}>
-                    <label className="font-[family-name:var(--font-inter)] text-[10px] tracking-[0.3em] uppercase text-[#C9A96E] block mb-3">
-                      {field.label}
-                    </label>
-                    <input
-                      type={field.type}
-                      placeholder={field.placeholder}
-                      required
-                      className="w-full bg-transparent border-b border-[#F5F0E8]/20 py-3 font-[family-name:var(--font-inter)] text-sm text-[#F5F0E8] placeholder-[#F5F0E8]/20 focus:outline-none focus:border-[#C9A96E] transition-colors duration-300"
-                    />
+                    <label className="font-[family-name:var(--font-inter)]" style={{ display: "block", fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#C9A96E", marginBottom: "12px" }}>{field.label}</label>
+                    <input type={field.type} placeholder={field.placeholder} required
+                      style={{ width: "100%", background: "transparent", border: "none", borderBottom: "1px solid rgba(245,240,232,0.2)", padding: "12px 0", fontSize: "14px", color: "#F5F0E8", outline: "none", fontFamily: "inherit" }} />
                   </div>
                 ))}
-
                 <div>
-                  <label className="font-[family-name:var(--font-inter)] text-[10px] tracking-[0.3em] uppercase text-[#C9A96E] block mb-3">
-                    Message
-                  </label>
-                  <textarea
-                    rows={5}
-                    placeholder="Tell us everything..."
-                    required
-                    className="w-full bg-transparent border-b border-[#F5F0E8]/20 py-3 font-[family-name:var(--font-inter)] text-sm text-[#F5F0E8] placeholder-[#F5F0E8]/20 focus:outline-none focus:border-[#C9A96E] transition-colors duration-300 resize-none"
-                  />
+                  <label className="font-[family-name:var(--font-inter)]" style={{ display: "block", fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#C9A96E", marginBottom: "12px" }}>Message</label>
+                  <textarea rows={5} placeholder="Tell us everything..." required
+                    style={{ width: "100%", background: "transparent", border: "none", borderBottom: "1px solid rgba(245,240,232,0.2)", padding: "12px 0", fontSize: "14px", color: "#F5F0E8", outline: "none", resize: "none", fontFamily: "inherit" }} />
                 </div>
-
-                <button
-                  type="submit"
-                  className="w-full font-[family-name:var(--font-inter)] text-xs tracking-[0.2em] uppercase bg-[#C9A96E] text-[#0A0A0A] py-5 hover:bg-[#F5F0E8] transition-all duration-300 mt-4">
+                <button type="submit" className="font-[family-name:var(--font-inter)]"
+                  style={{ width: "100%", fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", backgroundColor: "#C9A96E", color: "#0A0A0A", padding: "20px", border: "none", cursor: "pointer" }}>
                   Send Message
                 </button>
               </form>

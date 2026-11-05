@@ -25,3 +25,16 @@ html, body {
 
 .hero-btn-primary:hover { background-color: #F5F0E8 !important; }
 .hero-btn-secondary:hover { border-color: #C9A96E !important; color: #C9A96E !important; }
+
+.page-container {
+  width: 100%;
+  overflow-x: hidden;
+  background-color: #0A0A0A;
+  min-height: 100vh;
+}
+
+.page-inner {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 128px 32px 96px;
+}
